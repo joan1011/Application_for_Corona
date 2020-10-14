@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Corona Tracker</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap.min.css" integrity="sha512-BMbq2It2D3J17/C7aRklzOODG1IQ3+MHw3ifzBHMBwGO/0yUqYmsStgBjI0z5EYlaDEFnvYV7gNYdD3vFLRKsA==" crossorigin="anonymous" />
+</head>
+<body>
+<nav class="teal">
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo center">Corona Tracker</a>
+    </div>
+</nav>
+<div class="container">
+    <table id="corona-table" class="striped">
+        <thead>
+        <tr>
+            <th>Place</th>
+            <th>Confirmed</th>
+            <th>Confirmed changes</th>
+            <th>Active changes</th>
+            <th>Active</th>
+            <th>Recovered changes</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="corona:${coronaData}">
+            <td> <p th:text="${corona.combinedKey}"></p></td>
+            <td th:text="${corona.confirmed}"></td>
+            <td><span th:if="{corona.confirmedChanges > 0}" th:text="${ '+' corona.confirmedChanges}" class="badge red white-text"></span>
+                <span th:if="{corona.confirmedChanges == 0}" th:text="${ '+' corona.confirmedChanges}" class="badge grey black-text"></span>
+                <span th:if="{corona.confirmedChanges < 0}" th:text="${ '+' corona.confirmedChanges}" class="badge teal white-text"></span> </td>
+            <td th:text="${corona.confirmedChanges}"></td>
+            <td th:text="${corona.active}"></td>
+            <td><span th:if="{corona.activeChanges > 0}" th:text="${ '+' corona.activeChanges}" class="badge red white-text"></span>
+                <span th:if="{corona.activeChanges == 0}" th:text="${ '+' corona.activeChanges}" class="badge grey black-text"></span>
+                <span th:if="{corona.activeChanges < 0}" th:text="${ '+' corona.activeChanges}" class="badge teal white-text"></span> </td>
+            <td th:text="${corona.activeChanges}"></td>
+            <td th:text="${corona.recovered}"></td>
+            <td><span th:if="{corona.recoveredChanges > 0}" th:text="${ '+' corona.recoveredChanges}" class="badge red white-text"></span>
+                <span th:if="{corona.recoveredChanges == 0}" th:text="${ '+' corona.recoveredChanges}" class="badge grey black-text"></span>
+                <span th:if="{corona.recoveredChanges < 0}" th:text="${ '+' corona.recoveredChanges}" class="badge teal white-text"></span> </td>
+            <td th:text="${corona.recoveredChanges}"></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js" integrity="sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous"></script>
+<script>
+  $(document).ready( function () {
+    $('#corona-table').DataTable({
+        autowidth:false,
+        columnDefs:[{
+        targets; ['_all'],
+        className:'mdc-data-table__cell'}
+        ]});
+} );
+</script>
+</body>
+</html>
